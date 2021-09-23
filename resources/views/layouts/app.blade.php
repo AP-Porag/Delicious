@@ -1,10 +1,10 @@
-@extends('backend/partials/header')
+@include('backend/partials/header')
 <div class="body-wrapper">
     <!-- partial:../../partials/_sidebar.html -->
     <aside class="mdc-drawer mdc-drawer--dismissible mdc-drawer--open">
         <div class="mdc-drawer__header">
-            <a href="../../index.html" class="brand-logo">
-                <img src="{{asset('assets/backend/images/logo.svg')}}" alt="logo">
+            <a href="{{route('website')}}" class="brand-logo mdc-typography--headline1 text-white">
+                Delicious
             </a>
         </div>
         <div class="mdc-drawer__content">
@@ -15,9 +15,15 @@
             <div class="mdc-list-group">
                 <nav class="mdc-list mdc-drawer-menu">
                     <div class="mdc-list-item mdc-drawer-item">
-                        <a class="mdc-drawer-link" href="../../index.html">
+                        <a class="mdc-drawer-link" href="{{route('home')}}">
                             <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">home</i>
                             Dashboard
+                        </a>
+                    </div>
+                    <div class="mdc-list-item mdc-drawer-item">
+                        <a class="mdc-drawer-link" href="{{route('events')}}">
+                            <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">event_seat</i>
+                            Events
                         </a>
                     </div>
                     <div class="mdc-list-item mdc-drawer-item">
@@ -137,85 +143,8 @@
                 <div class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
                     <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button sidebar-toggler">menu</button>
                     <span class="mdc-top-app-bar__title">Greetings {{ Auth::user()->name }}!</span>
-                    <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon search-text-field d-none d-md-flex">
-                        <i class="material-icons mdc-text-field__icon">search</i>
-                        <input class="mdc-text-field__input" id="text-field-hero-input">
-                        <div class="mdc-notched-outline">
-                            <div class="mdc-notched-outline__leading"></div>
-                            <div class="mdc-notched-outline__notch">
-                                <label for="text-field-hero-input" class="mdc-floating-label">Search..</label>
-                            </div>
-                            <div class="mdc-notched-outline__trailing"></div>
-                        </div>
-                    </div>
                 </div>
                 <div class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end mdc-top-app-bar__section-right">
-                    <div class="menu-button-container menu-profile d-none d-md-block">
-                        <button class="mdc-button mdc-menu-button">
-                <span class="d-flex align-items-center">
-                  <span class="figure">
-                    <img src="{{asset('assets/backend/images/faces/face1.jpg')}}" alt="user" class="user">
-                  </span>
-                  <span class="user-name">{{ Auth::user()->name }}</span>
-                </span>
-                        </button>
-                        <div class="mdc-menu mdc-menu-surface" tabindex="-1">
-                            <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical">
-                                <li class="mdc-list-item" role="menuitem">
-                                    <div class="item-thumbnail item-thumbnail-icon-only">
-                                        <i class="mdi mdi-account-edit-outline text-primary"></i>
-                                    </div>
-                                    <div class="item-content d-flex align-items-start flex-column justify-content-center">
-                                        <h6 class="item-subject font-weight-normal">Edit profile</h6>
-                                    </div>
-                                </li>
-                                <li class="mdc-list-item" role="menuitem">
-                                    <div class="item-thumbnail item-thumbnail-icon-only">
-                                        <i class="mdi mdi-settings-outline text-primary"></i>
-                                    </div>
-                                    <div class="item-content d-flex align-items-start flex-column justify-content-center">
-                                        <h6 class="item-subject font-weight-normal">
-                                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                                {{ __('Logout') }}
-                                            </a>
-
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                                @csrf
-                                            </form>
-                                        </h6>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="divider d-none d-md-block"></div>
-                    <div class="menu-button-container d-none d-md-block">
-                        <button class="mdc-button mdc-menu-button">
-                            <i class="mdi mdi-settings"></i>
-                        </button>
-                        <div class="mdc-menu mdc-menu-surface" tabindex="-1">
-                            <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical">
-                                <li class="mdc-list-item" role="menuitem">
-                                    <div class="item-thumbnail item-thumbnail-icon-only">
-                                        <i class="mdi mdi-alert-circle-outline text-primary"></i>
-                                    </div>
-                                    <div class="item-content d-flex align-items-start flex-column justify-content-center">
-                                        <h6 class="item-subject font-weight-normal">Settings</h6>
-                                    </div>
-                                </li>
-                                <li class="mdc-list-item" role="menuitem">
-                                    <div class="item-thumbnail item-thumbnail-icon-only">
-                                        <i class="mdi mdi-progress-download text-primary"></i>
-                                    </div>
-                                    <div class="item-content d-flex align-items-start flex-column justify-content-center">
-                                        <h6 class="item-subject font-weight-normal">Update</h6>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
                     <div class="menu-button-container">
                         <button class="mdc-button mdc-menu-button">
                             <i class="mdi mdi-bell"></i>
@@ -302,26 +231,46 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="menu-button-container d-none d-md-block">
+                    <div class="divider d-none d-md-block"></div>
+                    <div class="menu-button-container menu-profile d-none d-md-block">
                         <button class="mdc-button mdc-menu-button">
-                            <i class="mdi mdi-arrow-down-bold-box"></i>
+                <span class="d-flex align-items-center">
+                  <span class="figure">
+                      @if(Auth::user()->avatar == '')
+                          <img src="{{asset('assets/backend/images/faces/face1.jpg')}}" alt="user" class="user">
+                      @else
+                          <img src="{{Auth::user()->avatar}}" alt="user" class="user">
+                      @endif
+                  </span>
+                  <span class="user-name">{{ Auth::user()->username }}</span>
+                </span>
                         </button>
                         <div class="mdc-menu mdc-menu-surface" tabindex="-1">
                             <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical">
                                 <li class="mdc-list-item" role="menuitem">
                                     <div class="item-thumbnail item-thumbnail-icon-only">
-                                        <i class="mdi mdi-lock-outline text-primary"></i>
+                                        <i class="mdi mdi-account-edit-outline text-primary"></i>
                                     </div>
                                     <div class="item-content d-flex align-items-start flex-column justify-content-center">
-                                        <h6 class="item-subject font-weight-normal">Lock screen</h6>
+                                        <h6 class="item-subject font-weight-normal">Edit profile</h6>
                                     </div>
                                 </li>
                                 <li class="mdc-list-item" role="menuitem">
                                     <div class="item-thumbnail item-thumbnail-icon-only">
-                                        <i class="mdi mdi-logout-variant text-primary"></i>
+                                        <i class="mdi mdi-settings-outline text-primary"></i>
                                     </div>
                                     <div class="item-content d-flex align-items-start flex-column justify-content-center">
-                                        <h6 class="item-subject font-weight-normal">Logout</h6>
+                                        <h6 class="item-subject font-weight-normal">
+                                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                                {{ __('Logout') }}
+                                            </a>
+
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                @csrf
+                                            </form>
+                                        </h6>
                                     </div>
                                 </li>
                             </ul>
@@ -335,21 +284,4 @@
             <main class="content-wrapper">
                 @yield('content')
             </main>
-            <!-- partial:../../partials/_footer.html -->
-            <footer>
-                <div class="mdc-layout-grid">
-                    <div class="mdc-layout-grid__inner">
-                        <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop">
-                            <span class="text-center text-sm-left d-block d-sm-inline-block tx-14">Copyright © <a href="https://www.bootstrapdash.com/" target="_blank">bootstrapdash.com </a>2020</span>
-                        </div>
-                        <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6-desktop d-flex justify-content-end">
-                            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center tx-14">Free <a href="https://www.bootstrapdash.com/material-design-dashboard/" target="_blank"> material admin </a> dashboards from Bootstrapdash.com</span>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-            <!-- partial -->
-        </div>
-    </div>
-</div>
-@extends('backend/partials/script-link')
+@include('backend/partials/script-link')

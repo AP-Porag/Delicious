@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Delicious Bootstrap Template - Index</title>
+    <title>{{env('app_name')}}</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -88,7 +88,11 @@
         </nav><!-- .navbar -->
 
         <a href="#book-a-table" class="book-a-table-btn scrollto">Book a table</a>
-        <a href="{{route('login')}}" class="book-a-table-btn scrollto">Login</a>
+        @if(Auth::check())
+            <a href="{{Auth::user()->role == 'admin' ? route('home') : route('website')}}" class="book-a-table-btn scrollto">My Account</a>
+        @else
+            <a href="{{route('login')}}" class="book-a-table-btn scrollto">Login</a>
+        @endif
 
     </div>
 </header><!-- End Header -->

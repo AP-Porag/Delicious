@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Material Dash</title>
+    <title>{{env('APP_NAME')}}</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{asset('assets/backend/vendors/mdi/css/materialdesignicons.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/backend/vendors/css/vendor.bundle.base.css')}}">
@@ -17,4 +17,5 @@
     <link rel="shortcut icon" href="{{asset('assets/backend/images/favicon.png')}}" />
 </head>
 <body>
-<script src="{{asset('assets/backend/js/preloader.js')}}"></script>
+{{--<script src="{{asset('assets/backend/js/preloader.js')}}"></script>--}}
+

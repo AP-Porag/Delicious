@@ -1,4 +1,4 @@
-@extends('backend/partials/header')
+@include('backend/partials/header')
 <div class="body-wrapper">
     <div class="main-wrapper">
         <div class="page-wrapper full-page-wrapper d-flex align-items-center justify-content-center">
@@ -65,4 +65,4 @@
         </div>
     </div>
 </div>
-@extends('backend/partials/script-link')
+@include('backend/partials/script-link')
